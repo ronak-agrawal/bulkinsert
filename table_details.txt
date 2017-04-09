@@ -1,0 +1,99 @@
+tables:
+
+
+
+CREATE TABLE `bulkinsert_del_file_record_details` (
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique id',
+  `fileid` VARCHAR(40) DEFAULT NULL COMMENT 'File id',
+  `filename` VARCHAR(256) DEFAULT NULL COMMENT 'File name',
+  `msisdn` VARCHAR(13) DEFAULT NULL,
+  `description` VARCHAR(512) DEFAULT NULL,
+  `status` SMALLINT(1) DEFAULT '-1' COMMENT '1=PROCESSING_SUCCESS ,2=PROCESSING_FAILED,-1=UNKNOWN',
+  `created_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reason` VARCHAR(20) DEFAULT NULL COMMENT 'Reason',
+  PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `bulkinsert_add_file_record_details` (
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique id',
+  `fileid` VARCHAR(40) DEFAULT NULL COMMENT 'File id',
+  `filename` VARCHAR(256) DEFAULT NULL COMMENT 'File name',
+  `msisdn` VARCHAR(13) DEFAULT NULL,
+  `description` VARCHAR(512) DEFAULT NULL,
+  `status` SMALLINT(1) DEFAULT '-1' COMMENT '1=PROCESSING_SUCCESS ,2=PROCESSING_FAILED,-1=UNKNOWN',
+  `created_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reason` VARCHAR(20) DEFAULT NULL COMMENT 'Reason',
+  PRIMARY KEY (`id`)
+)
+
+CREATE TABLE `bulkinsert_update_file_record_details` (
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique id',
+  `fileid` VARCHAR(40) DEFAULT NULL COMMENT 'File id',
+  `filename` VARCHAR(256) DEFAULT NULL COMMENT 'File name',
+  `msisdn` VARCHAR(13) DEFAULT NULL,
+  `description` VARCHAR(512) DEFAULT NULL,
+  `status` SMALLINT(1) DEFAULT '-1' COMMENT '1=PROCESSING_SUCCESS ,2=PROCESSING_FAILED,-1=UNKNOWN',
+  `created_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reason` VARCHAR(20) DEFAULT NULL COMMENT 'Reason',
+  PRIMARY KEY (`id`)
+)
+
+
+
+
+
+
+CREATE TABLE `tblsegments` (
+  `bisegmentid` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nvtitle` TEXT COLLATE utf8_unicode_ci,
+  `sitype` SMALLINT(2) DEFAULT NULL,
+  `vcfilepath` VARCHAR(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sistatus` SMALLINT(2) DEFAULT NULL,
+  `nvdesc` TEXT COLLATE utf8_unicode_ci,
+  `bicount` BIGINT(20) DEFAULT NULL COMMENT 'Total available numbers',
+  `dtcreatedon` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `vccreatedby` VARCHAR(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sinotify` SMALLINT(2) DEFAULT NULL,
+  `vcemailid` VARCHAR(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `flag` BIGINT(20) DEFAULT '0',
+  `dtstart` TIMESTAMP NULL DEFAULT NULL,
+  `dtend` TIMESTAMP NULL DEFAULT NULL,
+  `dtupdated_on` TIMESTAMP NULL DEFAULT NULL,
+  `vcupdatedby` VARCHAR(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `total_add_record_count` BIGINT(20) DEFAULT NULL,
+  `total_del_record_count` BIGINT(20) DEFAULT NULL,
+  `total_update_record_count` BIGINT(20) DEFAULT NULL,
+  `trans_id` VARCHAR(42) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bisuccess` BIGINT(20) DEFAULT NULL COMMENT 'Total success numbers',
+  `biinvalid` BIGINT(20) DEFAULT NULL COMMENT 'Total invalid numbers',
+  `biduplicate` BIGINT(20) DEFAULT NULL COMMENT 'Total duplicate numbers',
+  `bifailure` BIGINT(20) DEFAULT NULL COMMENT 'Total failure numbers',
+  PRIMARY KEY (`bisegmentid`),
+  KEY `dtend` (`dtend`),
+  KEY `dtstart` (`dtstart`),
+  KEY `flag` (`flag`),
+  KEY `sistatus` (`sistatus`),
+  KEY `sitype` (`sitype`)
+)
+
+
+
+CREATE TABLE `mail_notification_trans_logs` (
+  `ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Unique ID',
+  `TID` VARCHAR(40) DEFAULT NULL COMMENT 'Request transaction id',
+  `MAIL_SUBJECT` VARCHAR(256) NOT NULL COMMENT 'Mail subject',
+  `MAIL_BODY` TEXT NOT NULL COMMENT 'Mail body',
+  `MAIL_TO_LIST` TINYTEXT NOT NULL COMMENT 'Mail to list',
+  `MAIL_CC_LIST` TINYTEXT NOT NULL COMMENT 'Mail cc list',
+  `FILE_ATTACHMENT` VARCHAR(512) DEFAULT NULL COMMENT 'Mail attachment file path',
+  `APP_ID` VARCHAR(20) DEFAULT NULL COMMENT 'Application will handle this flag for picking purpose',
+  `FLAG` VARCHAR(20) DEFAULT NULL,
+  `CREATED_ON` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Record insertion date time',
+  `UPDATED_ON` DATETIME DEFAULT NULL COMMENT 'Record process date time',
+  `STATUS` TINYINT(3) UNSIGNED DEFAULT '0' COMMENT 'Status of mail notification request process',
+  `DESCRIPTION` TINYTEXT COMMENT 'Description about the transaction',
+  PRIMARY KEY (`ID`),
+  KEY `IDX_FLAG` (`FLAG`),
+  KEY `IDX_APP_ID` (`APP_ID`),
+  KEY `IDX_STATUS` (`STATUS`)
+)
